@@ -5,7 +5,7 @@ import { CartService } from './cart.service';
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  @Get()
+  @Get('/')
   getCart(): string {
     return this.cartService.getAllCart();
   }
