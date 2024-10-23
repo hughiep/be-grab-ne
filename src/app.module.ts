@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { CartModule } from './modules/cart/cart.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { ErrorModule } from './modules/error/error.module';
+import { WdfModule } from './modules/web3-data-fetcher/wdf.module';
 
 @Module({
-  imports: [CartModule, ErrorModule],
+  imports: [CartModule, ErrorModule, WdfModule],
   controllers: [AppController],
   providers: [AppService],
 })
