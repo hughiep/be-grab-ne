@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CartService {
+  constructor(private configService: ConfigService) {}
+
   getAllCart(): string {
-    return 'Carts';
+    return 'Carts' + this.configService.get('DATABASE_URL');
   }
 
   getCartById(id: string): string {
