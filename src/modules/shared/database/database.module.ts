@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../user/user.entity';
-import { UserRole } from '../user/role.entity';
-import { Customer } from '../user/customer/customer.entity';
-import { Driver } from '../user/driver/driver.entity';
-import { Seller } from '../user/seller/seller.entity';
+import { User } from '../../user/user.entity';
+import { UserRole } from '../../role/role.entity';
+import { Driver } from '../../driver/driver.entity';
+import { Seller } from '../../user/seller/seller.entity';
+import { Rider } from 'src/modules/rider/rider.entity';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { Seller } from '../user/seller/seller.entity';
       username: 'root',
       password: process.env.MYSQL_ROOT_PASSWORD,
       database: 'grab_like',
-      entities: [User, UserRole, Customer, Driver, Seller],
+      entities: [User, UserRole, Rider, Driver, Seller],
       synchronize: true,
     }),
   ],
