@@ -1,16 +1,18 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import Redis from 'ioredis';
+import { KafkaService } from '../shared/kafka/kafka.service';
+import { RedisService } from '../shared/redis/redis.service';
 
 @Injectable()
 export class LocationService implements OnModuleInit, OnModuleDestroy {
-  private redisClient: Redis;
   private readonly key = 'drivers';
 
+  constructor(
+    private readonly kafkaService: KafkaService,
+    private readonly redisClient: RedisService,
+  ) {}
+
   onModuleInit() {
-    this.redisClient = new Redis({
-      host: 'localhost',
-      port: 6379,
-    });
+    this.kafkaService.consumeLocationUpdates(this.updateLocation.bind(this));
   }
 
   async onModuleDestroy() {
@@ -54,7 +56,7 @@ export class LocationService implements OnModuleInit, OnModuleDestroy {
   }
 
   // Remove a driver from tracking
-  async removeDriver(driverId: string): Promise<void> {
-    await this.redisClient.zrem(this.key, driverId);
-  }
+  // async removeDriver(driverId: string): Promise<void> {
+  //   await this.redisClient.zrem(this.key, driverId);
+  // }
 }

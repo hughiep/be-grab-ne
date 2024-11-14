@@ -86,4 +86,7 @@ export class TripService {
   }
 
   // Additional methods like cancelTrip can be added similarly
+  getTrip(tripId: string): Trip | null {
+    return this.trips.get(tripId) || null;
+  }
 }

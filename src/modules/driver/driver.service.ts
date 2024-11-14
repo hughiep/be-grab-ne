@@ -20,4 +20,7 @@ export class DriverService {
   }
 
   // Additional driver-related methods
+  updateLocation(driverId: number, latitude: number, longitude: number): void {
+    // Update driver's location
+  }
 }

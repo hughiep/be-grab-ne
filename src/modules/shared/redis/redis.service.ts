@@ -8,7 +8,15 @@ export class RedisService {
   private readonly client: Redis;
 
   constructor() {
-    this.client = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
+    this.client = new Redis({
+      port: 6379,
+      host: 'localhost',
+      password: process.env.REDIS_PASSWORD,
+    });
+  }
+
+  quit() {
+    return this.client.quit();
   }
 
   async get(key: string): Promise<string> {
