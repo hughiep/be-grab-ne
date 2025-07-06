@@ -9,6 +9,7 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 
 import { AppModule } from './app.module';
+import { SWAGGER_AUTH_SCHEMES } from './shared/constants/swagger.constants';
 
 async function server() {
   const app = await NestFactory.create(AppModule);
@@ -71,7 +72,7 @@ async function server() {
         description: 'Enter JWT token',
         in: 'header',
       },
-      'JWT-auth',
+      SWAGGER_AUTH_SCHEMES.JWT,
     )
     .build();
 

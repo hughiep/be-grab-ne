@@ -15,12 +15,14 @@ import {
   ApiBody,
   ApiOkResponse,
   ApiCreatedResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
 import { Request, Response } from 'express';
 
 import { User } from '../users/user.entity';
+import { SWAGGER_AUTH_SCHEMES } from '../../shared/constants/swagger.constants';
 
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto, TokensDto } from './dto/auth.dto';
@@ -210,6 +212,7 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('logout')
   @HttpCode(HttpStatus.OK)
+  @ApiBearerAuth(SWAGGER_AUTH_SCHEMES.JWT)
   @ApiOperation({ summary: 'User logout' })
   @ApiOkResponse({
     description: 'Logout successful',
@@ -235,8 +238,9 @@ export class AuthController {
     });
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('profile')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth(SWAGGER_AUTH_SCHEMES.JWT)
   @ApiOperation({ summary: 'Get user profile' })
   @ApiOkResponse({
     description: 'User profile retrieved successfully',
