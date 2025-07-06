@@ -1,4 +1,5 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+
 import { KafkaService } from '../shared/kafka/kafka.service';
 import { RedisService } from '../shared/redis/redis.service';
 
