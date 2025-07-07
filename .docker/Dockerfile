@@ -48,9 +48,5 @@ COPY --chown=node:node --from=production /app/dist ./dist
 # Set environment variables
 ENV NODE_ENV=production
 
-# Expose application port
-ENV PORT=5000
-EXPOSE 5000
-
 # Start the application
 CMD [ "node", "dist/main.js" ]
